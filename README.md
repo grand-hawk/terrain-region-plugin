@@ -4,5 +4,7 @@ Alternative to [@sleitnick's terrain save and load plugin](https://create.roblox
 
 For the Luau module, see [load.luau](https://github.com/grand-hawk/terrain-region-plugin/blob/main/src/shared/load.luau).
 
+See [releases](https://github.com/grand-hawk/terrain-region-plugin/releases) tab or install from [the creator hub](https://create.roblox.com/store/asset/91863372715067).
+
 ![RobloxStudioBeta_nLl7EthOGZ](https://github.com/user-attachments/assets/2beee88e-b18a-45e0-a6d9-dbe1e8dd7305)
 ![RobloxStudioBeta_DpO52KNEVw](https://github.com/user-attachments/assets/b85771ae-4253-4ab5-943b-f6eb4529e222)
