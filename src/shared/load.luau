@@ -1,3 +1,10 @@
+--[[
+	Copyright 2024 git@astrid.email
+
+	Use of this source code is governed by an MIT-style
+	license that can be found in the LICENSE file at https://github.com/grand-hawk/terrain-region-plugin
+]]
+
 local module = {}
 
 function module.loadRegion(region: TerrainRegion)
