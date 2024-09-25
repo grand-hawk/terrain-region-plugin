@@ -8,30 +8,20 @@ import {
   ThemeProvider,
   Typography,
 } from '@grand-hawk/ui-components';
-import React, { useEffect, useState } from '@rbxts/react';
+import React, { useState } from '@rbxts/react';
 
 import { Selection } from 'services';
 import { load } from 'shared/load';
-import formatRegion3int16Size from 'utils/formatRegion3int16Size';
-import region3int16Size from 'utils/region3int16Size';
 import terrainToRegions from 'utils/terrainToRegions';
 
 export default function Index() {
-  const [terrainMaxExtents, setTerrainMaxExtents] = useState<Region3int16>(
-    game.Workspace.Terrain.MaxExtents,
+  const [selectionExtends, setSelectionExtends] = useState<Vector3>(
+    Vector3.zero,
   );
   const [horizontalRegionQuantity, setHorizontalRegionQuantity] =
     useState<number>(1);
   const [verticalRegionQuantity, setVerticalRegionQuantity] =
     useState<number>(1);
-
-  useEffect(() => {
-    const connection = game.Workspace.Terrain.GetPropertyChangedSignal(
-      'MaxExtents',
-    ).Connect(() => setTerrainMaxExtents(game.Workspace.Terrain.MaxExtents));
-
-    return () => connection.Disconnect();
-  }, []);
 
   return (
     <ThemeProvider theme={darkTheme}>
@@ -46,12 +36,58 @@ export default function Index() {
         Size={UDim2.fromScale(1, 1)}
       >
         <Box Gap={1}>
-          <Box Direction={Enum.FillDirection.Horizontal} Gap={0.5}>
-            <Typography Bold Text="Map extents:" />
-            <Typography
-              Font={Enum.Font.RobotoMono}
-              Text={formatRegion3int16Size(terrainMaxExtents)}
-            />
+          <Box
+            Direction={Enum.FillDirection.Horizontal}
+            Gap={1}
+            ListLayoutProps={{
+              HorizontalFlex: Enum.UIFlexAlignment.Fill,
+            }}
+          >
+            <Box Gap={1}>
+              <Typography Bold Text="Selection extends X" />
+              <Input
+                Change={{
+                  Text: (rbx) => {
+                    const newX = math.floor(
+                      tonumber(rbx.Text) || selectionExtends.X,
+                    );
+
+                    setSelectionExtends(
+                      new Vector3(newX, 0, selectionExtends.Z),
+                    );
+
+                    rbx.Text = tostring(newX);
+                  },
+                }}
+                PaddingX={1}
+                PaddingY={1}
+                Text={tostring(selectionExtends.X)}
+                TextSize={10}
+              />
+            </Box>
+
+            <Box Gap={1}>
+              <Typography Bold Text="Selection extends Z" />
+              <Input
+                Change={{
+                  Text: (rbx) => {
+                    const newZ = math.floor(
+                      tonumber(rbx.Text) || selectionExtends.Z,
+                    );
+
+                    setSelectionExtends(
+                      new Vector3(selectionExtends.X, 0, newZ),
+                    );
+
+                    rbx.Text = tostring(newZ);
+                  },
+                }}
+                PaddingX={1}
+                PaddingY={1}
+                Text={tostring(selectionExtends.Y)}
+                TextSize={10}
+              />
+            </Box>
           </Box>
 
           <Box
@@ -108,9 +144,8 @@ export default function Index() {
               Font={Enum.Font.RobotoMono}
               Text={string.format(
                 '%.2f, %.2f',
-                region3int16Size(terrainMaxExtents).X /
-                  horizontalRegionQuantity,
-                region3int16Size(terrainMaxExtents).Z / verticalRegionQuantity,
+                selectionExtends.X / horizontalRegionQuantity,
+                selectionExtends.Z / verticalRegionQuantity,
               )}
             />
           </Box>
@@ -129,6 +164,7 @@ export default function Index() {
               MouseButton1Click: () =>
                 Selection.Set([
                   terrainToRegions(
+                    selectionExtends,
                     horizontalRegionQuantity,
                     verticalRegionQuantity,
                   ),

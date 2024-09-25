@@ -20,7 +20,7 @@ function init() {
       500,
     ),
   );
-  pluginGui.Title = 'Save terrain regions';
+  pluginGui.Title = 'Generate terrain regions';
 
   const root = createRoot(new Instance('Folder'));
   root.render(createPortal(<Index />, pluginGui));

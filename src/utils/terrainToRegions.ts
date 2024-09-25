@@ -1,22 +1,24 @@
+import { Workspace } from '@rbxts/services';
+
 import getMaterialColor from './getMaterialColor';
-import region3int16Size from './region3int16Size';
 
 const utilsFolder = script.Parent! as Folder;
 const rootFolder = utilsFolder.Parent! as Folder;
 const sharedFolder = rootFolder.FindFirstChild('shared') as Folder;
 const loadModule = sharedFolder.FindFirstChild('load') as ModuleScript;
 
+const RESOLUTION = 4;
+
 export default function terrainToRegions(
+  selectionExtends: Vector3,
   horizontalRegionQuantity: number,
   verticalRegionQuantity: number,
 ) {
   const terrain = game.Workspace.Terrain;
-  const terrainMaxExtents = terrain.MaxExtents;
-  const terrainSize = region3int16Size(terrainMaxExtents);
 
   const exportFolder = new Instance('Folder');
   exportFolder.Name = 'TerrainRegions';
-  exportFolder.Parent = game.Workspace;
+  exportFolder.Parent = Workspace;
 
   const propertiesFolder = new Instance('Configuration');
   propertiesFolder.Name = 'WaterProperties';
@@ -40,41 +42,47 @@ export default function terrainToRegions(
   }
   materialColorsFolder.Parent = exportFolder;
 
-  const regionSize = new Vector3(
-    terrainSize.X / horizontalRegionQuantity,
-    terrainSize.Y,
-    terrainSize.Z / verticalRegionQuantity,
+  const terrainMin = new Vector3(
+    -(selectionExtends.X / 2),
+    0,
+    -(selectionExtends.Z / 2),
   );
 
-  for (let xIndex = 0; xIndex < horizontalRegionQuantity; xIndex += 1) {
-    const xOffset = xIndex * regionSize.X;
+  const regionSizeX = selectionExtends.X / horizontalRegionQuantity;
+  const regionSizeZ = selectionExtends.Z / verticalRegionQuantity;
 
+  for (let xIndex = 0; xIndex < horizontalRegionQuantity; xIndex += 1)
     for (let zIndex = 0; zIndex < verticalRegionQuantity; zIndex += 1) {
-      const zOffset = zIndex * regionSize.Z;
-
       const minCorner = new Vector3(
-        terrainMaxExtents.Min.X + xOffset,
-        terrainMaxExtents.Min.Y,
-        terrainMaxExtents.Min.Z + zOffset,
+        terrainMin.X + xIndex * regionSizeX,
+        terrain.MaxExtents.Min.Y,
+        terrainMin.Z + zIndex * regionSizeZ,
       );
       const maxCorner = new Vector3(
-        terrainMaxExtents.Min.X + xOffset + regionSize.X,
-        terrainMaxExtents.Min.Y + regionSize.Y,
-        terrainMaxExtents.Min.Z + zOffset + regionSize.Z,
+        minCorner.X + regionSizeX,
+        terrain.MaxExtents.Max.Y,
+        minCorner.Z + regionSizeZ,
       );
 
       const region = new Region3int16(
-        new Vector3int16(minCorner.X, minCorner.Y, minCorner.Z),
-        new Vector3int16(maxCorner.X, maxCorner.Y, maxCorner.Z),
+        new Vector3int16(
+          minCorner.X / RESOLUTION,
+          minCorner.Y / RESOLUTION,
+          minCorner.Z / RESOLUTION,
+        ),
+        new Vector3int16(
+          maxCorner.X / RESOLUTION,
+          maxCorner.Y / RESOLUTION,
+          maxCorner.Z / RESOLUTION,
+        ),
       );
 
       const terrainRegion = terrain.CopyRegion(region);
-      terrainRegion.Name = `Region ${xIndex}x ${zIndex}y`;
-      terrainRegion.Parent = exportFolder;
+      terrainRegion.Name = `Region ${xIndex}-${zIndex}`;
       terrainRegion.SetAttribute('MinCorner', minCorner);
       terrainRegion.SetAttribute('MaxCorner', maxCorner);
+      terrainRegion.Parent = exportFolder;
     }
-  }
 
   const loadModuleClone = loadModule.Clone();
   loadModuleClone.Name = 'LoadAPI';

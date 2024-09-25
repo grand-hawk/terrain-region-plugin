@@ -7,10 +7,16 @@
 
 local module = {}
 
+local RESOLUTION = 4
+
 function module.loadRegion(region: TerrainRegion)
 	local minCorner = region:GetAttribute("MinCorner") :: Vector3
 
-	workspace.Terrain:PasteRegion(region, Vector3int16.new(minCorner.X, minCorner.Y, minCorner.Z), true)
+	workspace.Terrain:PasteRegion(
+		region,
+		Vector3int16.new(minCorner.X / RESOLUTION, minCorner.Y / RESOLUTION, minCorner.Z / RESOLUTION),
+		true
+	)
 end
 
 function module.loadWaterProperties(waterProperties: Configuration)
