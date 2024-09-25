@@ -6,5 +6,5 @@ For the Luau module, see [load.luau](https://github.com/grand-hawk/terrain-regio
 
 See [releases](https://github.com/grand-hawk/terrain-region-plugin/releases) tab or install from [the creator hub](https://create.roblox.com/store/asset/91863372715067).
 
-![RobloxStudioBeta_nLl7EthOGZ](https://github.com/user-attachments/assets/2beee88e-b18a-45e0-a6d9-dbe1e8dd7305)
-![RobloxStudioBeta_DpO52KNEVw](https://github.com/user-attachments/assets/b85771ae-4253-4ab5-943b-f6eb4529e222)
+![RobloxStudioBeta_vXqEP1ws2f](https://github.com/user-attachments/assets/ad2fcbd8-7cbd-4c66-a25b-180c1f8927b2)
+![image](https://github.com/user-attachments/assets/b9a7a545-2add-4f09-8c0a-07f3c2e05c82)
