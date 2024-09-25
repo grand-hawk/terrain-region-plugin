@@ -10,8 +10,8 @@ import {
 } from '@grand-hawk/ui-components';
 import React, { useEffect, useState } from '@rbxts/react';
 
-import { load } from 'load';
 import { Selection } from 'services';
+import { load } from 'shared/load';
 import formatRegion3int16Size from 'utils/formatRegion3int16Size';
 import region3int16Size from 'utils/region3int16Size';
 import terrainToRegions from 'utils/terrainToRegions';

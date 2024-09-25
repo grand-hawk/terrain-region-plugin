@@ -1,6 +1,11 @@
 import getMaterialColor from './getMaterialColor';
 import region3int16Size from './region3int16Size';
 
+const utilsFolder = script.Parent! as Folder;
+const rootFolder = utilsFolder.Parent! as Folder;
+const sharedFolder = rootFolder.FindFirstChild('shared') as Folder;
+const loadModule = sharedFolder.FindFirstChild('load') as ModuleScript;
+
 export default function terrainToRegions(
   horizontalRegionQuantity: number,
   verticalRegionQuantity: number,
@@ -71,9 +76,9 @@ export default function terrainToRegions(
     }
   }
 
-  const loadModule = script.Parent!.Parent!.FindFirstChild('load')!.Clone();
-  loadModule.Name = 'LoadAPI';
-  loadModule.Parent = exportFolder;
+  const loadModuleClone = loadModule.Clone();
+  loadModuleClone.Name = 'LoadAPI';
+  loadModuleClone.Parent = exportFolder;
 
   return exportFolder;
 }
