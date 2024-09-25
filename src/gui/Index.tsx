@@ -65,12 +65,14 @@ export default function Index() {
               <Typography Bold Text="Horizontal region quantity" />
               <Input
                 Change={{
-                  Text: (rbx) =>
-                    setHorizontalRegionQuantity(
-                      math.floor(
-                        tonumber(rbx.Text) || horizontalRegionQuantity,
-                      ),
-                    ),
+                  Text: (rbx) => {
+                    const newValue = math.floor(
+                      tonumber(rbx.Text) || horizontalRegionQuantity,
+                    );
+
+                    setHorizontalRegionQuantity(newValue);
+                    rbx.Text = tostring(newValue);
+                  },
                 }}
                 PaddingX={1}
                 PaddingY={1}
@@ -83,10 +85,14 @@ export default function Index() {
               <Typography Bold Text="Vertical region quantity" />
               <Input
                 Change={{
-                  Text: (rbx) =>
-                    setVerticalRegionQuantity(
-                      math.floor(tonumber(rbx.Text) || verticalRegionQuantity),
-                    ),
+                  Text: (rbx) => {
+                    const newValue = math.floor(
+                      tonumber(rbx.Text) || verticalRegionQuantity,
+                    );
+
+                    setVerticalRegionQuantity(newValue);
+                    rbx.Text = tostring(newValue);
+                  },
                 }}
                 PaddingX={1}
                 PaddingY={1}
