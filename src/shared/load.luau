@@ -49,8 +49,12 @@ function module.load(folder: Folder)
 		end
 	end
 
+	workspace.Terrain:Clear()
+
 	for _, terrainRegion in terrainRegions do
 		module.loadRegion(terrainRegion)
+
+		task.wait()
 	end
 end
 
