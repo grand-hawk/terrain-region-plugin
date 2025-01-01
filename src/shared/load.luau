@@ -54,7 +54,7 @@ function module.load(folder: Folder)
 	for _, terrainRegion in terrainRegions do
 		module.loadRegion(terrainRegion)
 
-		task.wait()
+		task.wait(0.05)
 	end
 end
 
