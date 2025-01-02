@@ -2,6 +2,7 @@ import React from '@rbxts/react';
 import { createPortal, createRoot } from '@rbxts/react-roblox';
 
 import Index from 'gui/Index';
+import visualizeSelectedRegions from 'utils/visualizeSelectedRegions';
 
 function init() {
   if (!plugin) return;
@@ -25,8 +26,8 @@ function init() {
   const root = createRoot(new Instance('Folder'));
   root.render(createPortal(<Index />, pluginGui));
 
-  const button = toolbar.CreateButton(
-    id,
+  const mainButton = toolbar.CreateButton(
+    `${id}-main`,
     '',
     'rbxassetid://140019172180622',
     pluginGui.Title,
@@ -34,13 +35,22 @@ function init() {
 
   pluginGui.BindToClose(() => {
     pluginGui.Enabled = false;
-    button.SetActive(false);
+    mainButton.SetActive(false);
   });
 
-  button.Click.Connect(() => {
+  mainButton.Click.Connect(() => {
     pluginGui.Enabled = !pluginGui.Enabled;
-    button.SetActive(pluginGui.Enabled);
+    mainButton.SetActive(pluginGui.Enabled);
   });
+
+  const visualizeButton = toolbar.CreateButton(
+    `${id}-visualize`,
+    '',
+    'rbxassetid://140019172180622',
+    'Visualize selected regions',
+  );
+
+  visualizeButton.Click.Connect(() => visualizeSelectedRegions());
 }
 
 init();

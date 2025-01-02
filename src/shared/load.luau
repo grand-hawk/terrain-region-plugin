@@ -42,16 +42,22 @@ function module.load(folder: Folder)
 	local materialColors = folder:FindFirstChild("MaterialColors") :: Configuration
 	module.loadMaterialColors(materialColors)
 
-	local terrainRegions = {} :: { TerrainRegion }
+	local priorityTerrainRegions = {} :: { TerrainRegion }
+	local normalTerrainRegions = {} :: { TerrainRegion }
 	for _, child in folder:GetChildren() do
 		if child:IsA("TerrainRegion") then
-			table.insert(terrainRegions, child)
+			table.insert(if child.Name:match("-Priority$") then priorityTerrainRegions else normalTerrainRegions, child)
 		end
+	end
+
+	local sortedTerrainRegions = priorityTerrainRegions
+	for _, terrainRegion in normalTerrainRegions do
+		table.insert(sortedTerrainRegions, terrainRegion)
 	end
 
 	workspace.Terrain:Clear()
 
-	for _, terrainRegion in terrainRegions do
+	for _, terrainRegion in sortedTerrainRegions do
 		module.loadRegion(terrainRegion)
 
 		task.wait(0.05)

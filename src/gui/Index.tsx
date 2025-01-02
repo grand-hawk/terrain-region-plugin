@@ -138,15 +138,29 @@ export default function Index() {
             </Box>
           </Box>
 
-          <Box Direction={Enum.FillDirection.Horizontal} Gap={0.5}>
-            <Typography Bold Text="Region size:" />
+          <Box Gap={0.5}>
+            <Box Direction={Enum.FillDirection.Horizontal} Gap={0.5}>
+              <Typography Bold Text="Region size:" />
+              <Typography
+                Font={Enum.Font.RobotoMono}
+                Text={string.format(
+                  '%.2f, %.2f',
+                  selectionExtends.X / horizontalRegionQuantity,
+                  selectionExtends.Z / verticalRegionQuantity,
+                )}
+              />
+            </Box>
+          </Box>
+
+          <Box
+            Direction={Enum.FillDirection.Horizontal}
+            DisableListLayout
+            Gap={0.5}
+          >
             <Typography
-              Font={Enum.Font.RobotoMono}
-              Text={string.format(
-                '%.2f, %.2f',
-                selectionExtends.X / horizontalRegionQuantity,
-                selectionExtends.Z / verticalRegionQuantity,
-              )}
+              RichText
+              Text={`Suffix <font face="${Enum.Font.RobotoMono.Name}">-Priority</font> to a region's name to mark it as a priority region.`}
+              TextWrap
             />
           </Box>
         </Box>
@@ -159,6 +173,7 @@ export default function Index() {
           }}
         >
           <Button
+            AutomaticSize={Enum.AutomaticSize.Y}
             BorderRadius={1 * 8}
             Event={{
               MouseButton1Click: () =>
@@ -170,10 +185,12 @@ export default function Index() {
                   ),
                 ]),
             }}
+            Size={UDim2.fromScale(1, 0)}
             Text="Generate regions"
           />
 
           <SecondaryButton
+            AutomaticSize={Enum.AutomaticSize.Y}
             BorderRadius={1 * 8}
             Event={{
               MouseButton1Click: () => {
@@ -186,6 +203,7 @@ export default function Index() {
                 load(selection);
               },
             }}
+            Size={UDim2.fromScale(1, 0)}
             Text="Load regions"
           />
         </Box>
