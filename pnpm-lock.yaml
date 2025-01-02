@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       '@grand-hawk/ui-components':
-        specifier: ^0.3.0
-        version: 0.3.0
+        specifier: ^0.4.0
+        version: 0.4.0
       '@rbxts/react':
         specifier: ^17.2.3
         version: 17.2.3
@@ -87,8 +87,8 @@ packages:
     resolution: {integrity: sha512-d9zaMRSTIKDLhctzH12MtXvJKSSUhaHcjV+2Z+GK+EEY7XKpP5yR4x+N3TAcHTcu963nIr+TMcCb4DBCYX1z6Q==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
 
-  '@grand-hawk/ui-components@0.3.0':
-    resolution: {integrity: sha512-np8SQStY8qh5HBWcEXXh3157NfQ/bD6cYEdzpoTOIufUwlkM/bNcMNwt0w3xLD1Cu9atAinwu/yBHNEKH7+eEg==}
+  '@grand-hawk/ui-components@0.4.0':
+    resolution: {integrity: sha512-e8Ts4FO0x9VRMyjKOvjfp14Wp9hfA1BGLk9XhZhEslCRVFRLkLCoZKNfndtEEyB33aRYBjnq7fRSw9mSjH49xg==}
 
   '@humanwhocodes/config-array@0.13.0':
     resolution: {integrity: sha512-DZLEEqFWQFiyK6h5YIeynKx7JlvCYWL0cImfSRXZ9l4Sg2efkFGTuFf6vzXjK1cq6IYkU+Eg/JizXw+TD2vRNw==}
@@ -1592,9 +1592,9 @@ snapshots:
 
   '@eslint/js@8.57.1': {}
 
-  '@grand-hawk/ui-components@0.3.0':
+  '@grand-hawk/ui-components@0.4.0':
     dependencies:
-      '@rbxts/react': 0.4.0
+      '@rbxts/react': 17.2.3
       '@rbxts/react-roblox': 0.4.0
       '@rbxts/services': 1.5.5
       '@rbxts/ui-labs': 2.3.5
