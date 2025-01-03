@@ -13,6 +13,7 @@ export default function visualizeSelectedRegions() {
 
   const workspaceModel = new Instance('Model');
   workspaceModel.Name = 'TerrainRegionsVisualizer';
+  workspaceModel.Archivable = true;
   workspaceModel.Parent = game.Workspace;
 
   for (const region of validRegions) {
