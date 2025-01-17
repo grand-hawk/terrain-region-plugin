@@ -11,10 +11,10 @@ export default function visualizeSelectedRegions() {
   );
   if (!validRegions.size()) return print('No valid regions selected');
 
-  const workspaceModel = new Instance('Model');
-  workspaceModel.Name = 'TerrainRegionsVisualizer';
-  workspaceModel.Archivable = true;
-  workspaceModel.Parent = game.Workspace;
+  const workspaceFolder = new Instance('Folder');
+  workspaceFolder.Name = 'TerrainRegionsVisualizer';
+  workspaceFolder.Archivable = true;
+  workspaceFolder.Parent = game.Workspace;
 
   for (const region of validRegions) {
     const minCorner = region.GetAttribute('MinCorner') as Vector3;
@@ -27,6 +27,6 @@ export default function visualizeSelectedRegions() {
       new Vector3(size.X, 16, size.Z),
     );
     plane.Name = region.Name;
-    plane.Parent = workspaceModel;
+    plane.Parent = workspaceFolder;
   }
 }
