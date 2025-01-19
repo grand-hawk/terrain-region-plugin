@@ -15,8 +15,6 @@
     "strict": true,
     "target": "ESNext",
     "typeRoots": ["node_modules/@rbxts", "node_modules/@grand-hawk"],
-
-    "types": ["types/plugin"],
     "rootDir": "src",
     "outDir": "dist",
     "baseUrl": "src",
