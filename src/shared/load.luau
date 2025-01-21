@@ -26,12 +26,12 @@ function module.loadWaterProperties(waterProperties: Configuration)
 end
 
 function module.loadMaterialColors(materialColors: Configuration)
-	for _, materialColor in materialColors:GetChildren() do
-		if not materialColor:IsA("Color3Value") then
+	for _, value in materialColors:GetChildren() do
+		if not value:IsA("Color3Value") then
 			continue
 		end
 
-		workspace.Terrain:SetMaterialColor(materialColor.Name, materialColor.Value)
+		workspace.Terrain:SetMaterialColor(value.Name, value.Value)
 	end
 end
 
