@@ -2,8 +2,8 @@ import { Workspace } from '@rbxts/services';
 
 import getMaterialColor from './getMaterialColor';
 
-const utilsFolder = script.Parent! as Folder;
-const rootFolder = utilsFolder.Parent! as Folder;
+const utilsFolder = script.Parent as Folder;
+const rootFolder = utilsFolder.Parent as Folder;
 const sharedFolder = rootFolder.FindFirstChild('shared') as Folder;
 const loadModule = sharedFolder.FindFirstChild('load') as ModuleScript;
 
