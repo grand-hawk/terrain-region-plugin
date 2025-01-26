@@ -7,6 +7,8 @@
 
 local module = {}
 
+local RunService = game:GetService("RunService")
+
 local RESOLUTION = 4
 
 function module.loadRegion(region: TerrainRegion)
@@ -57,10 +59,12 @@ function module.load(folder: Folder)
 
 	workspace.Terrain:Clear()
 
+	RunService.Heartbeat:Wait()
+
 	for _, terrainRegion in sortedTerrainRegions do
 		module.loadRegion(terrainRegion)
 
-		task.wait(0.05)
+		RunService.Heartbeat:Wait()
 	end
 end
 
